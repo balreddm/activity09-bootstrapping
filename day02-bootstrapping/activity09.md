@@ -34,7 +34,7 @@ library(tidymodels)
     ## ✖ dplyr::lag()      masks stats::lag()
     ## ✖ yardstick::spec() masks readr::spec()
     ## ✖ recipes::step()   masks stats::step()
-    ## • Use tidymodels_prefer() to resolve common conflicts.
+    ## • Learn how to get started at https://www.tidymodels.org/start/
 
 ## Create the data
 
@@ -82,10 +82,10 @@ tidy(mlr_fit, conf.int = TRUE)
     ## # A tibble: 4 × 7
     ##   term        estimate std.error statistic  p.value conf.low conf.high
     ##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
-    ## 1 (Intercept)    2.41     0.773       3.12 6.63e- 3   0.772      4.05 
-    ## 2 x1             0.289    0.114       2.54 2.19e- 2   0.0475     0.530
-    ## 3 x2            -0.502    0.0135    -37.1  5.97e-17  -0.531     -0.473
-    ## 4 x3Yes          1.20     0.776       1.55 1.41e- 1  -0.445      2.85
+    ## 1 (Intercept)    1.62     0.707      2.29  3.57e- 2   0.123      3.12 
+    ## 2 x1             0.179    0.110      1.62  1.25e- 1  -0.0552     0.413
+    ## 3 x2            -0.495    0.0128   -38.6   3.20e-17  -0.522     -0.468
+    ## 4 x3Yes          0.407    0.698      0.583 5.68e- 1  -1.07       1.89
 
 ## Bootstrapping
 
@@ -121,28 +121,28 @@ boot_samps$splits[[1]] %>% analysis()
 ```
 
     ## # A tibble: 20 × 4
-    ##         x1    x2 x3          y
-    ##      <dbl> <dbl> <chr>   <dbl>
-    ##  1 -2.41   79.0  No    -37.4  
-    ##  2  0.338  74.8  Yes   -31.9  
-    ##  3 -4.81   45.2  No    -21.9  
-    ##  4  0.0786  1.54 Yes     1.31 
-    ##  5  3.46   53.2  No    -24.8  
-    ##  6 -4.82   64.3  Yes   -32.3  
-    ##  7 -4.62   96.2  Yes   -45.3  
-    ##  8 -0.0644 92.1  No    -43.9  
-    ##  9 -4.62   47.6  No    -23.0  
-    ## 10  4.86   74.7  Yes   -32.2  
-    ## 11  4.86   74.7  Yes   -32.2  
-    ## 12 -3.03    7.88 No      0.984
-    ## 13  4.04   60.4  No    -25.7  
-    ## 14 -4.62   47.6  No    -23.0  
-    ## 15 -2.41   79.0  No    -37.4  
-    ## 16  0.338  74.8  Yes   -31.9  
-    ## 17  0.0786  1.54 Yes     1.31 
-    ## 18  3.46   53.2  No    -24.8  
-    ## 19  0.0786  1.54 Yes     1.31 
-    ## 20  3.46   53.2  No    -24.8
+    ##         x1     x2 x3         y
+    ##      <dbl>  <dbl> <chr>  <dbl>
+    ##  1 -4.97   78.6   Yes   -36.4 
+    ##  2  2.18   64.1   No    -27.7 
+    ##  3 -3.50   61.6   No    -29.3 
+    ##  4  3.52   12.8   Yes    -3.39
+    ##  5 -4.90   76.3   No    -37.5 
+    ##  6 -0.903   1.02  No     -1.18
+    ##  7 -4.91   33.1   Yes   -12.8 
+    ##  8 -0.0686 67.1   Yes   -33.1 
+    ##  9 -2.37   76.0   No    -35.5 
+    ## 10  4.59    0.949 No      3.94
+    ## 11  4.59    0.949 No      3.94
+    ## 12  1.20   36.8   Yes   -15.3 
+    ## 13 -0.160  86.3   No    -40.2 
+    ## 14 -2.37   76.0   No    -35.5 
+    ## 15 -4.97   78.6   Yes   -36.4 
+    ## 16  2.18   64.1   No    -27.7 
+    ## 17  3.52   12.8   Yes    -3.39
+    ## 18 -4.90   76.3   No    -37.5 
+    ## 19  3.52   12.8   Yes    -3.39
+    ## 20 -4.90   76.3   No    -37.5
 
 ``` r
 # Create a function that fits a fixed MLR model to one split dataset
@@ -167,16 +167,16 @@ boots_coefs
     ## # A tibble: 8,000 × 8
     ##    splits         id            model  term     estim…¹ std.e…² stati…³  p.value
     ##    <list>         <chr>         <list> <chr>      <dbl>   <dbl>   <dbl>    <dbl>
-    ##  1 <split [20/8]> Bootstrap0001 <lm>   (Interc…   1.64   0.809    2.02  6.01e- 2
-    ##  2 <split [20/8]> Bootstrap0001 <lm>   x1         0.236  0.101    2.34  3.28e- 2
-    ##  3 <split [20/8]> Bootstrap0001 <lm>   x2        -0.488  0.0117 -41.6   9.69e-18
-    ##  4 <split [20/8]> Bootstrap0001 <lm>   x3Yes      1.09   0.690    1.58  1.34e- 1
-    ##  5 <split [20/6]> Bootstrap0002 <lm>   (Interc…   3.30   1.04     3.16  6.05e- 3
-    ##  6 <split [20/6]> Bootstrap0002 <lm>   x1         0.360  0.114    3.14  6.27e- 3
-    ##  7 <split [20/6]> Bootstrap0002 <lm>   x2        -0.512  0.0146 -35.0   1.54e-16
-    ##  8 <split [20/6]> Bootstrap0002 <lm>   x3Yes      0.538  0.797    0.675 5.09e- 1
-    ##  9 <split [20/6]> Bootstrap0003 <lm>   (Interc…   3.28   0.829    3.95  1.14e- 3
-    ## 10 <split [20/6]> Bootstrap0003 <lm>   x1         0.370  0.121    3.05  7.65e- 3
+    ##  1 <split [20/8]> Bootstrap0001 <lm>   (Interc…  1.84    0.793    2.32  3.39e- 2
+    ##  2 <split [20/8]> Bootstrap0001 <lm>   x1        0.305   0.118    2.59  1.97e- 2
+    ##  3 <split [20/8]> Bootstrap0001 <lm>   x2       -0.486   0.0138 -35.1   1.43e-16
+    ##  4 <split [20/8]> Bootstrap0001 <lm>   x3Yes     0.460   0.628    0.732 4.75e- 1
+    ##  5 <split [20/6]> Bootstrap0002 <lm>   (Interc…  1.19    0.589    2.02  6.08e- 2
+    ##  6 <split [20/6]> Bootstrap0002 <lm>   x1        0.209   0.122    1.71  1.06e- 1
+    ##  7 <split [20/6]> Bootstrap0002 <lm>   x2       -0.496   0.0169 -29.3   2.49e-15
+    ##  8 <split [20/6]> Bootstrap0002 <lm>   x3Yes     0.680   0.885    0.768 4.53e- 1
+    ##  9 <split [20/6]> Bootstrap0003 <lm>   (Interc…  1.48    0.619    2.39  2.93e- 2
+    ## 10 <split [20/6]> Bootstrap0003 <lm>   x1        0.0986  0.100    0.986 3.39e- 1
     ## # … with 7,990 more rows, and abbreviated variable names ¹​estimate, ²​std.error,
     ## #   ³​statistic
 
@@ -188,10 +188,10 @@ boot_int
     ## # A tibble: 4 × 6
     ##   term         .lower .estimate .upper .alpha .method   
     ##   <chr>         <dbl>     <dbl>  <dbl>  <dbl> <chr>     
-    ## 1 (Intercept)  0.911      2.45   4.46    0.05 percentile
-    ## 2 x1           0.0815     0.291  0.486   0.05 percentile
-    ## 3 x2          -0.537     -0.504 -0.480   0.05 percentile
-    ## 4 x3Yes       -0.131      1.31   2.84    0.05 percentile
+    ## 1 (Intercept)  0.194      1.59   3.44    0.05 percentile
+    ## 2 x1          -0.0408     0.189  0.437   0.05 percentile
+    ## 3 x2          -0.526     -0.494 -0.469   0.05 percentile
+    ## 4 x3Yes       -1.22       0.364  1.76    0.05 percentile
 
 ``` r
 ggplot(boots_coefs, aes(x = estimate)) +
